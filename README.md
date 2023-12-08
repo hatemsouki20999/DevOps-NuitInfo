@@ -9,8 +9,7 @@ cretion pipeline jenkins
         stage('ecrase l'image docker') {
           steps {
             script {
-                
-                    
+                                  
                         // L'image Docker contenant le code de l'application web en langage interprété
                         def dockerImage = docker.image('windsocially/app_node_crud')
 
@@ -33,20 +32,18 @@ cretion pipeline jenkins
             steps {
                 script {
                    
-                    // Utiliser Git pour ajouter, valider et pousser le code vers GitHub
+                  **** Utiliser Git pour ajouter, valider et pousser le code vers GitHub****
                   
                         withCredentials([usernamePassword(credentialsId: 'username', passwordVariable: 'password', usernameVariable: 'test')]) {    
-                        //clone repository avec ssh 
+                       ***clone repository avec ssh 
       sh 'git clone git@github.com:hatemsouki20999/DevOps-NuitInfo.git'
       ou  par https 
        sh 'git clone https:${username}:${password}@github.com/hatemsouki20999/DevOps-NuitInfo.git'
       
 }
-                   
-            
                        sh "cp -r app DevOps-NuitInfo"
 
-                        // Ajout, commit et push des modifications
+                        *** Ajout, commit et push des modifications
                         dir('DevOps-NuitInfo') {
                             sh 'git add .'
                             sh 'git commit -m "Ajout du code extrait"'
