@@ -1,39 +1,60 @@
-# Dockerized Node.js Backend Application
-This repository contains source code for a basic `to-do` CRUD (Create, Read, Update, Delete) based Node.js application. The application source code also contains a `Dockerfile` to build an image and containerize the application.
+Image docker docker hub : windsocially/app_node_crud
 
-## Folder Structure
-```
-├── Dockerfile
-├── README.md
-├── package-lock.json
-├── package.json
-└── src
-   ├── app.js
-   ├── config
-   ├── controllers
-   ├── index.js
-   ├── models
-   ├── routes
-   └── test
-```
 
-## Dockerfile
-```
-FROM node:14-alpine
-WORKDIR /usr/src/app
-COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
-RUN npm install 
-COPY . .
-EXPOSE 3001
-RUN chown -R node /usr/src/app
-USER node
-CMD ["npm", "start"]
-```
+cretion pipeline jenkins 
+ pipeline {
+    agent any
 
-## Run Application with Docker
-Run the following commands in your terminal to build the image, start a container and test the application.
-```
-docker build -t <image-tag> .
-docker run -p 3001:3001 <image-tag>
-curl http://127.0.0.1:3001
-```
+    stages {
+        stage('ecrase l'image docker') {
+          steps {
+            script {
+                
+                    
+                        // L'image Docker contenant le code de l'application web en langage interprété
+                        def dockerImage = docker.image('windsocially/app_node_crud')
+
+                        // Créer un conteneur temporaire à partir de l'image Docker
+                        def container = dockerImage.run('-d')
+
+                        try {
+                            // Copier le code source depuis le conteneur temporaire vers le workspace Jenkins
+                            sh "docker cp ${container.id}:/usr/src/app ."
+                        } finally {
+                            // Arrêter et supprimer le conteneur temporaire
+                            container.stop()
+                            codeContainer.remove()
+                            
+                        }
+             }     
+            }
+        }
+        stage('Transfert du code vers GitHub') {
+            steps {
+                script {
+                   
+                    // Utiliser Git pour ajouter, valider et pousser le code vers GitHub
+                  
+                        withCredentials([usernamePassword(credentialsId: 'username', passwordVariable: 'password', usernameVariable: 'test')]) {    
+                        //clone repository avec ssh 
+      sh "git clone git@github.com:hatemsouki20999/DevOps-NuitInfo.git"
+      ou  par https 
+       sh "git clone https:${username}:${password}@github.com/hatemsouki20999/DevOps-NuitInfo.git"
+      
+}
+                   
+            
+                       sh "cp -r app DevOps-NuitInfo"
+
+                        // Ajout, commit et push des modifications
+                        dir('DevOps-NuitInfo') {
+                            sh 'git add .'
+                            sh 'git commit -m "Ajout du code extrait"'
+                            sh 'git push origin main'
+                        }
+                      
+                }
+            }
+        }
+    }
+}
