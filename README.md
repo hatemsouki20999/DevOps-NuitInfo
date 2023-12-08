@@ -38,10 +38,10 @@ cretion pipeline jenkins
                        ***clone repository avec ssh || https 
       sh 'git clone git@github.com:hatemsouki20999/DevOps-NuitInfo.git'
 
-       sh 'git clone https:${username}:${password}@github.com/hatemsouki20999/DevOps-NuitInfo.git'
-      
+       sh 'git clone https:${username}:${password}@github.com/hatemsouki20999/DevOps-NuitInfo.git'      
 }
-                       sh 'cp -r app DevOps-NuitInfo'
+
+               sh 'cp -r app DevOps-NuitInfo'
 
                         *** Ajout, commit et push des modifications
                         dir('DevOps-NuitInfo') {
