@@ -37,9 +37,9 @@ cretion pipeline jenkins
                   
                         withCredentials([usernamePassword(credentialsId: 'username', passwordVariable: 'password', usernameVariable: 'test')]) {    
                         //clone repository avec ssh 
-      sh "git clone git@github.com:hatemsouki20999/DevOps-NuitInfo.git"
+      sh 'git clone git@github.com:hatemsouki20999/DevOps-NuitInfo.git'
       ou  par https 
-       sh "git clone https:${username}:${password}@github.com/hatemsouki20999/DevOps-NuitInfo.git"
+       sh 'git clone https:${username}:${password}@github.com/hatemsouki20999/DevOps-NuitInfo.git'
       
 }
                    
