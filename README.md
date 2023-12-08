@@ -1,7 +1,7 @@
 Image docker docker hub : windsocially/app_node_crud
 
 
-cretion pipeline jenkins 
+creation pipeline jenkins 
  pipeline {
     agent any
 
