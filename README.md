@@ -35,9 +35,9 @@ cretion pipeline jenkins
                   **** Utiliser Git pour ajouter, valider et pousser le code vers GitHub****
                   
                         withCredentials([usernamePassword(credentialsId: 'username', passwordVariable: 'password', usernameVariable: 'test')]) {    
-                       ***clone repository avec ssh 
+                       ***clone repository avec ssh || https 
       sh 'git clone git@github.com:hatemsouki20999/DevOps-NuitInfo.git'
-      ou  par https 
+
        sh 'git clone https:${username}:${password}@github.com/hatemsouki20999/DevOps-NuitInfo.git'
       
 }
